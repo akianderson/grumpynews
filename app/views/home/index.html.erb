@@ -1,7 +1,7 @@
 <div id="recent_feeds">
   <h3>BBC test feed</h3>
   <ul>
-  <% for entry in FeedEntry.all(:limit => 10, :order => "published_at desc") %>
+  <% for entry in FeedEntry.all(:limit => 100, :order => "published_at asc") %>
     <li><%= link_to h(entry.name), entry.url %></li>
   <% end %>
   </ul>
