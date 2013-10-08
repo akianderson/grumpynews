@@ -16,7 +16,7 @@ class FeedEntry < ActiveRecord::Base
     entries.each do |entry|
     classification = Set.new(entry.title.downcase.split(" ")).intersection(GRUMPIES).count > 0 ? 'G' : 'H'
         create(
-          :name         => entry.title,
+          :name         => entry.title[0..254],
           :summary      => entry.summary,
           :url          => entry.url,
           :published_at => entry.published,
