@@ -21,7 +21,7 @@ class FeedEntry < ActiveRecord::Base
           :url          => entry.url,
           :published_at => entry.published,
           :guid         => entry.id,
-          :base_url     => feed_url
+          :base_url     => feed_url,
 	  :classification 	=> classification
         )
     end
