@@ -1,8 +1,14 @@
-<div id="recent_feeds">
-  <h3>BBC test feed</h3>
-  <ul>
-  <% for entry in FeedEntry.all(:limit => 10, :order => "published_at desc") %>
-    <li><%= link_to h(entry.name), entry.url %></li>
-  <% end %>
-  </ul>
+<div class="row row-offcanvas">
+	<div class="rows">
+		<% Feed.all.each do |feed| %>
+			<div class="col-6 col-sm-6 col-lg-4">
+			<h2><%= feed.title %></h2>
+			<p class="box-color">
+	 		<% for entry in FeedEntry.where(:base_url => feed.feed_url) %>
+	   		<%= link_to h(truncate(entry.name)), entry.url, :title => entry.name %><br/>
+	  	<% end %>
+	  	</p>
+	  	</div>
+	  <% end %>
+	</div>
 </div>
