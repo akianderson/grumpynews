@@ -15,8 +15,7 @@ class FeedEntry < ActiveRecord::Base
   def self.add_entries(entries, feed_url)
     entries.each do |entry|
     classification = Set.new(entry.title.downcase.split(" ")).intersection(GRUMPIES).count > 0 ? 'G' : 'H'
-      unless exists? :guid => entry.id
-        create!(
+        create(
           :name         => entry.title,
           :summary      => entry.summary,
           :url          => entry.url,
@@ -25,7 +24,6 @@ class FeedEntry < ActiveRecord::Base
           :base_url     => feed_url
 	  :classification 	=> classification
         )
-      end
     end
   end
 end
