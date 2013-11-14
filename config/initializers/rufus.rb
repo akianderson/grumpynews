@@ -11,7 +11,7 @@ scheduler.every("15m") do
 	  	feed.last_retrieved = Time.now
 	  	feed.save
 	  	Rails.logger.info "i just saved a feed for #{feed}!!!"
-	 
+	        end
 	rescue
 		puts "oops db connection died"
 	ensure
