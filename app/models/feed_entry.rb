@@ -14,15 +14,18 @@ class FeedEntry < ActiveRecord::Base
   
   def self.add_entries(entries, feed_url)
     entries.each do |entry|
+    if entry.title.nil?
+      next
+    end
     classification = Set.new(entry.title.downcase.split(" ")).intersection(GRUMPIES).count > 0 ? 'G' : 'H'
         create(
-          :name         => entry.title[0..254],
-          :summary      => entry.summary,
-          :url          => entry.url,
-          :published_at => entry.published,
-          :guid         => entry.id,
-          :base_url     => feed_url,
-	  :classification 	=> classification
+          :name             => entry.title[0..254],
+          :summary          => entry.summary,
+          :url              => entry.url,
+          :published_at     => entry.published,
+          :guid             => entry.id,
+          :base_url         => feed_url,
+	        :classification 	=> classification
         )
     end
   end

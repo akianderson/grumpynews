@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'rufus/scheduler'
 
-scheduler = Rufus::Scheduler.start_new
+scheduler = Rufus::Scheduler.new
 
 scheduler.every("15m") do
 	begin
