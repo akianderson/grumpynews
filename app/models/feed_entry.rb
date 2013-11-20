@@ -7,7 +7,11 @@ class FeedEntry < ActiveRecord::Base
 
   def self.update_from_feed(feed_url)
     feed = Feedzirra::Feed.fetch_and_parse(feed_url)
-    add_entries(feed.entries[0..10], feed_url)
+    unless feed.is_a?(Fixnum)
+	add_entries(feed.entries[0..10], feed_url)
+    else
+	
+    end
   end
 
   private
