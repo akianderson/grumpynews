@@ -1,11 +1,11 @@
 <div class="row row-offcanvas">
 	<div class="rows">
 		<% Feed.all.each do |feed| %>
-			<div class="col-6 col-sm-6 col-lg-4">
+			<div class="col-6 col-sm-6 col-lg-4 feed-container">
 			<h2><%= feed.title %></h2>
 			<p class="box-color">
 	 		<% for entry in FeedEntry.where(:base_url => feed.feed_url) %>
-	   		<%= link_to h(truncate(entry.name)), entry.url, :title => entry.name %><br/>
+	   		<%= link_to h(entry.name), entry.url, :title => entry.name, class: "feedTitle" %><br/>
 	  	<% end %>
 	  	</p>
 	  	</div>

@@ -15,6 +15,14 @@ footer {
   padding-right: 15px;
 }
 
+div.feed-container a{
+  width: 100%;
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  line-height: 15px;
+}
 /*
  * Off Canvas
  * --------------------------------------------------
