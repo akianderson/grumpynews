@@ -28,7 +28,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 gem 'feedzirra'
-gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass', branch: '3'
+gem 'bootstrap-sass'
 gem 'rufus-scheduler'
 gem 'pry-rails'
 

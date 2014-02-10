@@ -17,3 +17,7 @@
 
 # Ignore RubyMine
 .idea/
+
+# Ignore RVM settings
+.rvmrc
+.ruby-version
