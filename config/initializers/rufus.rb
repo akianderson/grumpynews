@@ -7,11 +7,11 @@ scheduler.every("15m") do
 	begin
 		FeedEntry.delete_all
 		Feed.all.each do |feed|
-	  	FeedEntry.update_from_feed(feed.feed_url)
-	  	feed.last_retrieved = Time.now
-	  	feed.save
-	  	Rails.logger.info "i just saved a feed for #{feed}!!!"
-	        end
+		  	FeedEntry.update_from_feed(feed.feed_url, feed.id)
+		  	feed.last_retrieved = Time.now
+		  	feed.save
+		  	Rails.logger.info "i just saved a feed for #{feed}!!!"
+	    end
 	rescue
 		puts "oops db connection died"
 	ensure

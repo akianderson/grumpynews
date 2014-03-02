@@ -1,5 +1,7 @@
 // Generated on 2014-02-27 using generator-angular 0.7.1
 'use strict';
+var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
+var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
 
 // # Globbing
 // for performance reasons we're only matching one level down:
@@ -7,7 +9,9 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
+
 module.exports = function (grunt) {
+  grunt.loadNpmTasks('grunt-connect-proxy');
 
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
@@ -22,7 +26,7 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'app',
-      dist: 'dist'
+      dist: '../public'
     },
 
     // Watches files for changes and runs tasks based on the changed files
@@ -65,13 +69,35 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
+      proxies: [{
+        context: '/api',
+        host: 'localhost',
+        port:'3000'
+      }],
       livereload: {
         options: {
           open: true,
           base: [
             '.tmp',
             '<%= yeoman.app %>'
-          ]
+          ],
+          middleware: function (connect, options) {
+            var middlewares = [];
+               
+            if (!Array.isArray(options.base)) {
+              options.base = [options.base];
+            }
+               
+            // Setup the proxy
+            middlewares.push(require('grunt-connect-proxy/lib/utils').proxyRequest);
+     
+            // Serve static files
+            options.base.forEach(function(base) {
+              middlewares.push(connect.static(base));
+            });
+     
+            return middlewares;
+          }
         }
       },
       test: {
@@ -363,6 +389,7 @@ module.exports = function (grunt) {
       'bower-install',
       'concurrent:server',
       'autoprefixer',
+      'configureProxies:server', 
       'connect:livereload',
       'watch'
     ]);

@@ -1,4 +1,4 @@
 json.array!(@feeds) do |feed|
-  json.extract! feed, :feed_url, :last_retrieved
+  json.extract! feed, :feed_url, :title, :id, :feed_entries
   json.url feed_url(feed, format: :json)
 end

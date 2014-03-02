@@ -1,14 +1,20 @@
 'use strict';
 
 angular.module('angularApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeLinks = [
-      'Whole bunch of awesome links here',
-      'Text text text text text',
-      'Text so more link animations',
-      'So many words and phrases',
-      'Also, lots of kittens somewhere',
-      'More stuff to look square',
-      'More suqare looks better'
-    ];
+  .controller('MainCtrl', function ($scope, $resource) {
+    $scope.show = false;
+
+    $scope.feeds = $resource("/api/feeds.json").query();
+
+    $scope.getClass = function(index) {
+      if(index % 4 == 0){
+        return 'box-blue';
+      } else if (index % 3 == 0){
+        return 'box-green';
+      } else if (index % 2 == 0){
+        return 'box-green';
+      } else {
+        return 'box-pink';
+      }
+    }
   });
