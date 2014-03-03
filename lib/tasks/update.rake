@@ -2,7 +2,7 @@ task :update_feeds => :environment do
   begin
     FeedEntry.delete_all
     Feed.all.each do |feed|
-      FeedEntry.update_from_feed(feed.feed_url)
+      FeedEntry.update_from_feed(feed.feed_url, feed.id)
       feed.last_retrieved = Time.now
       feed.save
       puts "i just saved a feed for #{feed.title}!!!"
