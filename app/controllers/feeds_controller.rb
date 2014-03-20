@@ -1,4 +1,10 @@
 class FeedsController < ApplicationController
+  before_filter :login_required, only: [:edit, :update, :new]
+
+  def login_required
+   redirect_to 'http://www.grumpycatnews.com'
+  end
+
   before_action :set_feed, only: [:show, :edit, :update, :destroy]
 
   # GET /feeds
