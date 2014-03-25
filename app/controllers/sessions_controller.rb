@@ -1,12 +1,8 @@
 class SessionsController < ApplicationController
-	before_filter :login_required, :only => [ :destroy ]
-
 	def create
-    omniauth = env['omniauth.auth']
-    logger.debug "+++ #{omniauth}"
+    session[:omniauth] = env['omniauth.auth']
 
-    flash[:notice] = "Successfully logged in"
-    redirect_to root_path
+    redirect_to feeds_path
   end
 
   # Omniauth failure callback
@@ -18,9 +14,9 @@ class SessionsController < ApplicationController
   # logout - Clear our rack session BUT essentially redirect to the provider
   # to clean up the Devise session from there too !
   def destroy
-    session[:user_id] = nil
+    session[:omniauth] = nil
 
     flash[:notice] = 'You have successfully signed out!'
-    redirect_to "#{CUSTOM_PROVIDER_URL}/users/sign_out"
+    redirect_to "#{CUSTOM_PROVIDER_URL}/sign_out"
   end
 end

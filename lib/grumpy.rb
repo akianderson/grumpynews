@@ -11,23 +11,22 @@ module OmniAuth
         :access_token_url => "#{CUSTOM_PROVIDER_URL}/auth/grumpy/access_token"
       }
 
-      uid { raw_info['id'] }
+      uid { raw_info['uid'] }
 
       info do
         {
-          :email => raw_info['email']
+          :email => raw_info['info']['email']
         }
       end
 
       extra do
         {
-          :first_name => raw_info['extra']['first_name'],
-          :last_name  => raw_info['extra']['last_name']
+          :original_provider => raw_info['provider'], 
+          :name => raw_info['extra']['name']
         }
       end
 
       def raw_info
-        binding.pry
         @raw_info ||= access_token.get("/auth/grumpy/user.json?oauth_token=#{access_token.token}").parsed
       end
     end

@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   def login_required
-   # redirect_to 'http://www.grumpycatnews.com'
     if !current_user
       respond_to do |format|
         format.html  {
@@ -18,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    return nil unless session[:user_id]
-    @current_user ||= session[:user_id]
+    return nil unless session[:omniauth]
+    @current_user ||=  session[:omniauth]
   end
 end
