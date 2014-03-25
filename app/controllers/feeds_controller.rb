@@ -2,7 +2,17 @@ class FeedsController < ApplicationController
   before_filter :login_required, only: [:edit, :update, :new]
 
   def login_required
-   redirect_to 'http://www.grumpycatnews.com'
+   # redirect_to 'http://www.grumpycatnews.com'
+    if !current_user
+      respond_to do |format|
+        format.html  {
+          redirect_to '/auth/grumpy'
+        }
+        format.json {
+          render :json => { 'error' => 'Access Denied' }.to_json
+        }
+      end
+    end
   end
 
   before_action :set_feed, only: [:show, :edit, :update, :destroy]

@@ -31,6 +31,8 @@ gem 'feedzirra'
 gem 'bootstrap-sass'
 gem 'rufus-scheduler'
 gem 'pry-rails'
+gem 'omniauth'
+gem 'omniauth-oauth2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

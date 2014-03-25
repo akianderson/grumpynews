@@ -9,7 +9,13 @@ GrumpyNews::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  
+  # omniauth
+  match '/auth/:provider/callback', :to => 'sessions#create', :via => [:get, :post]
+  match '/auth/failure', :to => 'sessions#failure', :via => [:get, :post]
+
+  # Custom logout
+  match '/logout', :to => 'sessions#destroy', :via => [:get, :post]
+
   root 'home#index'
   get 'home/:classification' => 'home#index'
 
