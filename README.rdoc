@@ -1,3 +1,3 @@
 == README
 
-A rails app that stores and displays RSS feeds.
+A rails app that stores and displays RSS feeds with angular for the main apps front end.
